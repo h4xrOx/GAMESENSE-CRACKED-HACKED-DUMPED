@@ -5,6 +5,7 @@
 #### */* https://discord.gg/EYCBURUPcm
 
 # Tutorial: How to build gamesense.pub's loader
+![image](https://user-images.githubusercontent.com/65768277/188307392-2f8fc600-b244-45d2-b1b6-b70d80b2c1a6.png)
 
 # Prerequisites 
 
@@ -285,18 +286,41 @@ In this method, the Swagger/OAS contract is generated from an API based on the m
 
 
 
+## Package and run the application
 
-The cool thing about Inspector is that you can select multiple end points and consolidate their documentation in one single OpenAPI file through a Collection.
+```
+./mvnw quarkus:dev
+```
 
- mvnw compile quarkus:dev
+### Open your browser to http://localhost:8080/greeting.
+
+#### The result should be: `{"message": "hello"}.`
+
+#### quarkus:dev runs Quarkus in development mode. This enables live reload with background compilation, which means that when you modify your Java files and/or your resource files and refresh your browser, these changes will automatically take effect. This works too for resource files like the configuration property file. Refreshing the browser triggers a scan of the workspace, and if any changes are detected, the Java files are recompiled and the application is redeployed; your request is then serviced by the redeployed application. If there are any issues with compilation or deployment an error page will let you know. This will also listen for a debugger on port 5005. If you want to wait for the debugger to attach before running you can pass -Dsuspend on the command line. If you don’t want the debugger at all you can use -Ddebug=false.
 
 
-#### quarkus:dev runs Quarkus in development mode. This enables live reload with background compilation, which means that when you modify your Java files and/or your resource files and refresh your browser, these changes will automatically take effect. This works too for resource files like the configuration property file. Refreshing the browser triggers a scan of the workspace, and if any changes are detected, the Java files are recompiled and the application is redeployed; your request is then serviced by the redeployed application. If there are any issues with compilation or deployment an error page will let you know.
+### Run the application as a native executable
 
-#### This will also listen for a debugger on port 5005. If you want to wait for the debugger to attach before running you can pass -Dsuspend on the command line. If you don’t want the debugger at all you can use -Ddebug=false.
+```
+./mvnw package -Dnative
+```
+
+# Adding OpenAPI and Swagger-UI
+## You can add support for OpenAPI and Swagger-UI by using the quarkus-smallrye-openapi extension.
+
+### Add the extension by running this command: 
+
+```
+./mvnw quarkus:add-extension -Dextensions="io.quarkus:quarkus-smallrye-openapi"
+```
+
+#### The command below is enough to generate a basic OpenAPI schema document from your REST Endpoints You will see the generated OpenAPI schema document:
+```
+curl http://localhost:8080/q/openapi
+```
 
 
-https://gamesensical.gitbook.io/docs/developers/globals/bit
+
 
 
 
